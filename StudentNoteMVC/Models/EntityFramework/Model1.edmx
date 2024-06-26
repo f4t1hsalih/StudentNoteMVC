@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_MVCSchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_classes">
+          <Key>
+            <PropertyRef Name="cls_id" />
+          </Key>
+          <Property Name="cls_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cls_name" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tbl_clubs">
+          <Key>
+            <PropertyRef Name="clb_id" />
+          </Key>
+          <Property Name="clb_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clb_name" Type="varchar" MaxLength="50" />
+          <Property Name="clb_quota" Type="smallint" />
+        </EntityType>
+        <EntityType Name="tbl_grades">
+          <Key>
+            <PropertyRef Name="grd_id" />
+          </Key>
+          <Property Name="grd_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="grd_cls_id" Type="tinyint" />
+          <Property Name="grd_std_id" Type="tinyint" />
+          <Property Name="grd_exam1" Type="tinyint" />
+          <Property Name="grd_exam2" Type="tinyint" />
+          <Property Name="grd_exam3" Type="tinyint" />
+          <Property Name="grd_project" Type="tinyint" />
+          <Property Name="grd_average" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="grd_status" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_students">
+          <Key>
+            <PropertyRef Name="std_id" />
+          </Key>
+          <Property Name="std_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="std_name" Type="varchar" MaxLength="30" />
+          <Property Name="std_surname" Type="varchar" MaxLength="30" />
+          <Property Name="std_photo" Type="varchar" MaxLength="200" />
+          <Property Name="std_gender" Type="bit" />
+          <Property Name="std_clb_id" Type="tinyint" />
+        </EntityType>
+        <Association Name="FK_tbl_grades_tbl_classes">
+          <End Role="tbl_classes" Type="Self.tbl_classes" Multiplicity="0..1" />
+          <End Role="tbl_grades" Type="Self.tbl_grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_classes">
+              <PropertyRef Name="cls_id" />
+            </Principal>
+            <Dependent Role="tbl_grades">
+              <PropertyRef Name="grd_cls_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_grades_tbl_students">
+          <End Role="tbl_students" Type="Self.tbl_students" Multiplicity="0..1" />
+          <End Role="tbl_grades" Type="Self.tbl_grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_students">
+              <PropertyRef Name="std_id" />
+            </Principal>
+            <Dependent Role="tbl_grades">
+              <PropertyRef Name="grd_std_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_students_tbl_clubs">
+          <End Role="tbl_clubs" Type="Self.tbl_clubs" Multiplicity="0..1" />
+          <End Role="tbl_students" Type="Self.tbl_students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_clubs">
+              <PropertyRef Name="clb_id" />
+            </Principal>
+            <Dependent Role="tbl_students">
+              <PropertyRef Name="std_clb_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_MVCSchoolModelStoreContainer">
+          <EntitySet Name="tbl_classes" EntityType="Self.tbl_classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_clubs" EntityType="Self.tbl_clubs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_grades" EntityType="Self.tbl_grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_students" EntityType="Self.tbl_students" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_grades_tbl_classes" Association="Self.FK_tbl_grades_tbl_classes">
+            <End Role="tbl_classes" EntitySet="tbl_classes" />
+            <End Role="tbl_grades" EntitySet="tbl_grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_grades_tbl_students" Association="Self.FK_tbl_grades_tbl_students">
+            <End Role="tbl_students" EntitySet="tbl_students" />
+            <End Role="tbl_grades" EntitySet="tbl_grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_students_tbl_clubs" Association="Self.FK_tbl_students_tbl_clubs">
+            <End Role="tbl_clubs" EntitySet="tbl_clubs" />
+            <End Role="tbl_students" EntitySet="tbl_students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_MVCSchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_classes">
+          <Key>
+            <PropertyRef Name="cls_id" />
+          </Key>
+          <Property Name="cls_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cls_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_grades" Relationship="Self.FK_tbl_grades_tbl_classes" FromRole="tbl_classes" ToRole="tbl_grades" />
+        </EntityType>
+        <EntityType Name="tbl_clubs">
+          <Key>
+            <PropertyRef Name="clb_id" />
+          </Key>
+          <Property Name="clb_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clb_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clb_quota" Type="Int16" />
+          <NavigationProperty Name="tbl_students" Relationship="Self.FK_tbl_students_tbl_clubs" FromRole="tbl_clubs" ToRole="tbl_students" />
+        </EntityType>
+        <EntityType Name="tbl_grades">
+          <Key>
+            <PropertyRef Name="grd_id" />
+          </Key>
+          <Property Name="grd_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="grd_cls_id" Type="Byte" />
+          <Property Name="grd_std_id" Type="Byte" />
+          <Property Name="grd_exam1" Type="Byte" />
+          <Property Name="grd_exam2" Type="Byte" />
+          <Property Name="grd_exam3" Type="Byte" />
+          <Property Name="grd_project" Type="Byte" />
+          <Property Name="grd_average" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="grd_status" Type="Boolean" />
+          <NavigationProperty Name="tbl_classes" Relationship="Self.FK_tbl_grades_tbl_classes" FromRole="tbl_grades" ToRole="tbl_classes" />
+          <NavigationProperty Name="tbl_students" Relationship="Self.FK_tbl_grades_tbl_students" FromRole="tbl_grades" ToRole="tbl_students" />
+        </EntityType>
+        <EntityType Name="tbl_students">
+          <Key>
+            <PropertyRef Name="std_id" />
+          </Key>
+          <Property Name="std_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="std_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="std_surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="std_photo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="std_gender" Type="Boolean" />
+          <Property Name="std_clb_id" Type="Byte" />
+          <NavigationProperty Name="tbl_clubs" Relationship="Self.FK_tbl_students_tbl_clubs" FromRole="tbl_students" ToRole="tbl_clubs" />
+          <NavigationProperty Name="tbl_grades" Relationship="Self.FK_tbl_grades_tbl_students" FromRole="tbl_students" ToRole="tbl_grades" />
+        </EntityType>
+        <Association Name="FK_tbl_grades_tbl_classes">
+          <End Role="tbl_classes" Type="Self.tbl_classes" Multiplicity="0..1" />
+          <End Role="tbl_grades" Type="Self.tbl_grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_classes">
+              <PropertyRef Name="cls_id" />
+            </Principal>
+            <Dependent Role="tbl_grades">
+              <PropertyRef Name="grd_cls_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_students_tbl_clubs">
+          <End Role="tbl_clubs" Type="Self.tbl_clubs" Multiplicity="0..1" />
+          <End Role="tbl_students" Type="Self.tbl_students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_clubs">
+              <PropertyRef Name="clb_id" />
+            </Principal>
+            <Dependent Role="tbl_students">
+              <PropertyRef Name="std_clb_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_grades_tbl_students">
+          <End Role="tbl_students" Type="Self.tbl_students" Multiplicity="0..1" />
+          <End Role="tbl_grades" Type="Self.tbl_grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_students">
+              <PropertyRef Name="std_id" />
+            </Principal>
+            <Dependent Role="tbl_grades">
+              <PropertyRef Name="grd_std_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_MVCSchoolEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_classes" EntityType="Self.tbl_classes" />
+          <EntitySet Name="tbl_clubs" EntityType="Self.tbl_clubs" />
+          <EntitySet Name="tbl_grades" EntityType="Self.tbl_grades" />
+          <EntitySet Name="tbl_students" EntityType="Self.tbl_students" />
+          <AssociationSet Name="FK_tbl_grades_tbl_classes" Association="Self.FK_tbl_grades_tbl_classes">
+            <End Role="tbl_classes" EntitySet="tbl_classes" />
+            <End Role="tbl_grades" EntitySet="tbl_grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_students_tbl_clubs" Association="Self.FK_tbl_students_tbl_clubs">
+            <End Role="tbl_clubs" EntitySet="tbl_clubs" />
+            <End Role="tbl_students" EntitySet="tbl_students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_grades_tbl_students" Association="Self.FK_tbl_grades_tbl_students">
+            <End Role="tbl_students" EntitySet="tbl_students" />
+            <End Role="tbl_grades" EntitySet="tbl_grades" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_MVCSchoolModelStoreContainer" CdmEntityContainer="DB_MVCSchoolEntities">
+          <EntitySetMapping Name="tbl_classes">
+            <EntityTypeMapping TypeName="DB_MVCSchoolModel.tbl_classes">
+              <MappingFragment StoreEntitySet="tbl_classes">
+                <ScalarProperty Name="cls_id" ColumnName="cls_id" />
+                <ScalarProperty Name="cls_name" ColumnName="cls_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_clubs">
+            <EntityTypeMapping TypeName="DB_MVCSchoolModel.tbl_clubs">
+              <MappingFragment StoreEntitySet="tbl_clubs">
+                <ScalarProperty Name="clb_id" ColumnName="clb_id" />
+                <ScalarProperty Name="clb_name" ColumnName="clb_name" />
+                <ScalarProperty Name="clb_quota" ColumnName="clb_quota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_grades">
+            <EntityTypeMapping TypeName="DB_MVCSchoolModel.tbl_grades">
+              <MappingFragment StoreEntitySet="tbl_grades">
+                <ScalarProperty Name="grd_id" ColumnName="grd_id" />
+                <ScalarProperty Name="grd_cls_id" ColumnName="grd_cls_id" />
+                <ScalarProperty Name="grd_std_id" ColumnName="grd_std_id" />
+                <ScalarProperty Name="grd_exam1" ColumnName="grd_exam1" />
+                <ScalarProperty Name="grd_exam2" ColumnName="grd_exam2" />
+                <ScalarProperty Name="grd_exam3" ColumnName="grd_exam3" />
+                <ScalarProperty Name="grd_project" ColumnName="grd_project" />
+                <ScalarProperty Name="grd_average" ColumnName="grd_average" />
+                <ScalarProperty Name="grd_status" ColumnName="grd_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_students">
+            <EntityTypeMapping TypeName="DB_MVCSchoolModel.tbl_students">
+              <MappingFragment StoreEntitySet="tbl_students">
+                <ScalarProperty Name="std_id" ColumnName="std_id" />
+                <ScalarProperty Name="std_name" ColumnName="std_name" />
+                <ScalarProperty Name="std_surname" ColumnName="std_surname" />
+                <ScalarProperty Name="std_photo" ColumnName="std_photo" />
+                <ScalarProperty Name="std_gender" ColumnName="std_gender" />
+                <ScalarProperty Name="std_clb_id" ColumnName="std_clb_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
