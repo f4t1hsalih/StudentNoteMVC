@@ -16,7 +16,6 @@ namespace StudentNoteMVC.Controllers
             }
         }
 
-        [HttpPost]
         public ActionResult CreateClass()
         {
             return View();
