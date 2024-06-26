@@ -1,0 +1,35 @@
+﻿@using StudentNoteMVC.Models.EntityFramework
+@model List<tbl_students>
+
+@{
+    ViewBag.Title = "Öğrenci Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Öğrenci Listesi</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Öğrenci Adı</th>
+            <th>Öğrenci Soyadı</th>
+            <th>Öğrenci Fotoğrafı</th>
+            <th>Öğrenci Cinsiyeti</th>
+            <th>Öğrenci Kulübü</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.std_id</td>
+                <td>@item.std_name</td>
+                <td>@item.std_surname</td>
+                <td>@item.std_gender</td>
+                <td><img src="@item.std_photo" alt="Fotoğraf" /></td>
+                <td>@item.tbl_clubs.clb_name</td>
+            </tr>
+        }
+    </tbody>
+</table>
