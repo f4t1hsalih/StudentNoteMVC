@@ -14,7 +14,12 @@ namespace StudentNoteMVC.Controllers
                 var classes = db.tbl_classes.ToList();
                 return View(classes);
             }
+        }
 
+        [HttpPost]
+        public ActionResult CreateClass()
+        {
+            return View();
         }
     }
 }
