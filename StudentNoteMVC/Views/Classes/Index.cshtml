@@ -1,0 +1,27 @@
+﻿@using StudentNoteMVC.Models.EntityFramework
+@model List<tbl_classes>
+@{
+    ViewBag.Title = "Ders Tablosu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dersler Tablosu</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Ders Adı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><strong> @item.cls_id </strong></td>
+                <td>@item.cls_name</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
