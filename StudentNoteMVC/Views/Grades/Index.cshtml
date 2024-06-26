@@ -1,0 +1,39 @@
+﻿@model List<StudentNoteMVC.Models.EntityFramework.tbl_grades>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Not Listesi</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Öğrenci</th>
+            <th>Ders</th>
+            <th>Sınav 1</th>
+            <th>Sınav 2</th>
+            <th>Sınav 3</th>
+            <th>Ortalama</th>
+            <th>Durum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.grd_id</td>
+                <td>@item.tbl_students.std_name</td>
+                <td>@item.tbl_classes.cls_name</td>
+                <td>@item.grd_exam1</td>
+                <td>@item.grd_exam2</td>
+                <td>@item.grd_exam3</td>
+                <td>@item.grd_average</td>
+                <td>@item.grd_status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
