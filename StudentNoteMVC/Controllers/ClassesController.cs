@@ -16,6 +16,13 @@ namespace StudentNoteMVC.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult CreateClass()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult CreateClass(tbl_classes classes)
         {
             using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
