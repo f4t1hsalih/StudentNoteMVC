@@ -15,5 +15,23 @@ namespace StudentNoteMVC.Controllers
                 return View(students);
             }
         }
+
+        // Create Student
+        [HttpGet]
+        public ActionResult AddStudent()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddStudent(tbl_students student)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                db.tbl_students.Add(student);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
     }
 }
