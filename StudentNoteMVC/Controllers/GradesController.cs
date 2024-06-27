@@ -18,5 +18,28 @@ namespace StudentNoteMVC.Controllers
                 return View(grades);
             }
         }
+
+        // AddGrade
+        [HttpGet]
+        public ActionResult AddGrade()
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                ViewBag.Students = db.tbl_students.ToList();
+                ViewBag.Classes = db.tbl_classes.ToList();
+                return View();
+            }
+        }
+        [HttpPost]
+        public ActionResult AddGrade(tbl_grades grade)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                db.tbl_grades.Add(grade);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
     }
 }

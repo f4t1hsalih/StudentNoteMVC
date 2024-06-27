@@ -238,6 +238,7 @@
     <Content Include="Views\Classes\CreateClass.cshtml" />
     <Content Include="Views\Clubs\CreateClub.cshtml" />
     <Content Include="Views\Students\AddStudent.cshtml" />
+    <Content Include="Views\Grades\AddGrade.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
