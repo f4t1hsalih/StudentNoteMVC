@@ -36,9 +36,11 @@
                 }
             </select>
         </div>*@
-    <div class="form-group">
-        <label for="club">Kulüp</label>
-        @Html.DropDownList("Clubs", null, "Kulüp Seçin", new { @class = "form-control" })
-    </div>
+<div class="form-group">
+    <label for="club">Kulüp</label>
+    @*@Html.DropDownList("Clubs", null, "Kulüp Seçin", new { @class = "form-control" })*@
+    @Html.DropDownList("std_clb_id", ViewBag.Clubs as SelectList, "Kulüp Seçin", new { @class = "form-control"})
+
+</div>
     <button type="submit" class="btn btn-success">Kaydet</button>
 </form>

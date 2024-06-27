@@ -16,6 +16,7 @@
             <th>Sınav 1</th>
             <th>Sınav 2</th>
             <th>Sınav 3</th>
+            <th>Proje</th>
             <th>Ortalama</th>
             <th>Durum</th>
         </tr>
@@ -25,16 +26,24 @@
         {
             <tr>
                 <td>@item.grd_id</td>
-                <td>@item.tbl_students.std_name</td>
+                <td>@item.tbl_students.std_name @item.tbl_students.std_surname</td>
                 <td>@item.tbl_classes.cls_name</td>
                 <td>@item.grd_exam1</td>
                 <td>@item.grd_exam2</td>
                 <td>@item.grd_exam3</td>
+                <td>@item.grd_project</td>
                 <td>@item.grd_average</td>
-                <td>@item.grd_status</td>
+                @if (item.grd_status == true)
+                {
+                    <td>Geçti</td>
+                }
+                else
+                {
+                    <td>Kaldı</td>
+                }
             </tr>
         }
     </tbody>
 </table>
 
-<a href="/Grades/AddGrade">Not Ekle</a>
+<a href="/Grades/AddGrade" class="btn btn-primary">Not Ekle</a>
