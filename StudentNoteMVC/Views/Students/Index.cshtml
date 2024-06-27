@@ -14,8 +14,8 @@
             <th>#</th>
             <th>Öğrenci Adı</th>
             <th>Öğrenci Soyadı</th>
-            <th>Öğrenci Fotoğrafı</th>
             <th>Öğrenci Cinsiyeti</th>
+            <th>Öğrenci Fotoğrafı</th>
             <th>Öğrenci Kulübü</th>
         </tr>
     </thead>
@@ -26,12 +26,30 @@
                 <td>@item.std_id</td>
                 <td>@item.std_name</td>
                 <td>@item.std_surname</td>
-                <td>@item.std_gender</td>
+                @if (item.std_gender == true)
+                {
+                    <td>Erkek</td>
+                }
+                else if (item.std_gender == false)
+                {
+                    <td>Kadın</td>
+                }
+                else
+                {
+                    <td>Bilinmiyor</td>
+                }
                 <td><img src="@item.std_photo" alt="Fotoğraf" /></td>
-                <td>@item.tbl_clubs.clb_name</td>
+                @if (item.std_clb_id == null)
+                {
+                    <td>Kulübü Yok</td>
+                }
+                else
+                {
+                    <td>@item.tbl_clubs.clb_name</td>
+                }
             </tr>
         }
     </tbody>
 </table>
 
-<a href="/Students/CreateStudent" class="btn btn-primary">Yeni Öğrenci Ekle</a>
+<a href="/Students/AddStudent" class="btn btn-primary">Yeni Öğrenci Ekle</a>

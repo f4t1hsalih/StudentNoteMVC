@@ -16,12 +16,18 @@ namespace StudentNoteMVC.Controllers
             }
         }
 
-        // Create Student
+        // GET: AddStudent
         [HttpGet]
         public ActionResult AddStudent()
         {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                ViewBag.Clubs = new SelectList(db.tbl_clubs.ToList(), "clb_id", "clb_name");
+            }
             return View();
         }
+
+        // POST: AddStudent
         [HttpPost]
         public ActionResult AddStudent(tbl_students student)
         {

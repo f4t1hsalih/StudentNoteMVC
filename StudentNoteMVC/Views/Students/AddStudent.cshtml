@@ -1,4 +1,4 @@
-﻿@model List<StudentNoteMVC.Models.EntityFramework.tbl_clubs>
+﻿@model StudentNoteMVC.Models.EntityFramework.tbl_clubs
 
 @{
     ViewBag.Title = "AddStudent";
@@ -18,20 +18,27 @@
     </div>
     <div class="form-group">
         <label for="photo">Fotoğraf</label>
-        <input type="number" id="photo" name="std_photo" class="form-control" required>
+        <input type="text" id="photo" name="std_photo" class="form-control">
     </div>
     <div class="form-group">
         <label for="gender">Cinsiyet</label>
-        <input type="text" id="gender" name="std_gender" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="club">Kulüp:</label>
-        <select id="club" name="std_clb_id" class="form-control" required>
-            @foreach (var club in Model)
-            {
-                <option value="@club.clb_id">@club.clb_name</option>
-            }
+        <select id="gender" name="std_gender" class="form-control" required>
+            <option value="true">Erkek</option>
+            <option value="false">Kadın</option>
         </select>
+    </div>
+    @*<div class="form-group">
+            <label for="club">Kulüp</label>
+            <select id="club" name="std_clb_id" class="form-control" required>
+                @foreach (var club in ViewBag.Clubs)
+                {
+                    <option value="@club.Value">@club.Text</option>
+                }
+            </select>
+        </div>*@
+    <div class="form-group">
+        <label for="club">Kulüp</label>
+        @Html.DropDownList("Clubs", null, "Kulüp Seçin", new { @class = "form-control" })
     </div>
     <button type="submit" class="btn btn-success">Kaydet</button>
 </form>
