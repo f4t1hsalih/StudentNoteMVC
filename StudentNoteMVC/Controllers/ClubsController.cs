@@ -15,5 +15,24 @@ namespace StudentNoteMVC.Controllers
                 return View(clubs);
             }
         }
+
+
+        // Create Club
+        [HttpGet]
+        public ActionResult CreateClub()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateClub(tbl_clubs club)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                db.tbl_clubs.Add(club);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
     }
 }
