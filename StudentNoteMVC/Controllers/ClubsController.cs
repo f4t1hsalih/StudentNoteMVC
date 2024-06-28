@@ -34,5 +34,17 @@ namespace StudentNoteMVC.Controllers
             }
         }
 
+        // Delete Club
+        public ActionResult DeleteClub(int id)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                var club = db.tbl_clubs.Find(id);
+                db.tbl_clubs.Remove(club);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
     }
 }
