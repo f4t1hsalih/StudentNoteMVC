@@ -17,6 +17,8 @@
             <th>Öğrenci Cinsiyeti</th>
             <th>Öğrenci Fotoğrafı</th>
             <th>Öğrenci Kulübü</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
         </tr>
     </thead>
     <tbody>
@@ -43,6 +45,8 @@
                 {
                     <td>@item.tbl_clubs.clb_name</td>
                 }
+                <td><a href="/Students/UpdateStudent/@item.std_id" class="btn btn-warning">Güncelle</a></td>
+                <td><a href="/Students/DeleteStudent/@item.std_id" class="btn btn-danger">Sil</a></td>
             </tr>
         }
     </tbody>
