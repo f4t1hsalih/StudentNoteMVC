@@ -39,5 +39,17 @@ namespace StudentNoteMVC.Controllers
             }
         }
 
+        // Delete Student
+        public ActionResult DeleteStudent(int id)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                var student = db.tbl_students.Find(id);
+                db.tbl_students.Remove(student);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
     }
 }

@@ -30,7 +30,19 @@ namespace StudentNoteMVC.Controllers
                 db.tbl_classes.Add(classes);
                 db.SaveChanges();
             }
-            return View();
+            return RedirectToAction("Index");
+        }
+
+        // Delete Class
+        public ActionResult DeleteClass(int id)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                var classes = db.tbl_classes.Find(id);
+                db.tbl_classes.Remove(classes);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
     }
 }
