@@ -12,6 +12,8 @@
         <tr>
             <th>#</th>
             <th>Ders Adı</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +22,8 @@
             <tr>
                 <td><strong> @item.cls_id </strong></td>
                 <td>@item.cls_name</td>
+                <td><a href="/Classes/UpdateClass/@item.cls_id" class="btn btn-warning">Güncelle</a></td>
+                <td><a href="/Classes/DeleteClass/@item.cls_id" class="btn btn-danger">Sil</a></td>
             </tr>
         }
     </tbody>
