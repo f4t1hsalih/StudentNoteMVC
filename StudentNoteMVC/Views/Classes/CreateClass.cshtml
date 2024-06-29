@@ -1,4 +1,5 @@
-﻿
+﻿@model StudentNoteMVC.Models.EntityFramework.tbl_classes
+
 @{
     ViewBag.Title = "CreateClass";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,13 +7,16 @@
 
 <h2>Ders Ekle</h2>
 
-<form method="post" class="form-group">
-    <div>
-        <label>Ders Adı</label>
-        <input type="text" class="form-control" name="cls_name" />
+@using (Html.BeginForm("CreateClass", "Classes", FormMethod.Post, new { @class = "form-group" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.cls_name, "Ders Adı")
+        @Html.TextBoxFor(m => m.cls_name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.cls_name, "", new { @class = "text-danger" })
     </div>
-    <br />
-    <div>
-        <button class="btn btn-success">Kaydet</button>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Kaydet</button>
+        <a href="@Url.Action("Index", "Classes")" class="btn btn-secondary">İptal</a>
     </div>
-</form>
+}

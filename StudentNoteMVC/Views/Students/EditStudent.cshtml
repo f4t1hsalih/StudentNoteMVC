@@ -1,12 +1,13 @@
 ﻿@model StudentNoteMVC.Models.EntityFramework.tbl_students
 
 @{
-    ViewBag.Title = "EditStudent";
+    ViewBag.Title = "Öğrenci Düzenle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using (Html.BeginForm("EditStudent", "Students", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         <h2>Öğrenci Düzenle</h2>
@@ -14,23 +15,23 @@
         @Html.HiddenFor(model => model.std_id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.std_name, labelText: "Öğrenci Adı")
+            @Html.LabelFor(model => model.std_name, "Öğrenci Adı", htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.std_name, new { htmlAttributes = new { @class = "form-control" } })
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.std_surname, labelText: "Öğrenci Soyadı")
+            @Html.LabelFor(model => model.std_surname, "Öğrenci Soyadı", htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.std_surname, new { htmlAttributes = new { @class = "form-control" } })
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.std_photo, labelText: "Öğrenci Fotoğrafı")
+            @Html.LabelFor(model => model.std_photo, "Öğrenci Fotoğrafı", htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.std_photo, new { htmlAttributes = new { @class = "form-control" } })
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.std_gender, labelText: "Öğrenci Cinsiyeti")
+            @Html.LabelFor(model => model.std_gender, "Öğrenci Cinsiyeti", htmlAttributes: new { @class = "control-label" })
             @Html.DropDownList("std_gender", ViewBag.Genders as SelectList, htmlAttributes: new { @class = "form-control" })
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.std_clb_id, labelText: "Öğrenci Kulübü")
+            @Html.LabelFor(model => model.std_clb_id, "Öğrenci Kulübü", htmlAttributes: new { @class = "control-label" })
             @Html.DropDownList("std_clb_id", ViewBag.Clubs as SelectList, htmlAttributes: new { @class = "form-control" })
         </div>
         <div class="form-group">
@@ -38,4 +39,3 @@
         </div>
     </div>
 }
-

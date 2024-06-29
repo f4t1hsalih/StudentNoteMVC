@@ -4,11 +4,12 @@
     ViewBag.Title = "Dersler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-<h2>Dersler Listesi</h2>
+<h2 class="mb-4">Dersler Listesi</h2>
 
-<table class="table table-bordered">
-    <thead>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
         <tr>
             <th>#</th>
             <th>Ders Adı</th>
@@ -22,11 +23,31 @@
             <tr>
                 <td><strong> @item.cls_id </strong></td>
                 <td>@item.cls_name</td>
-                <td><a href="/Classes/EditClass/@item.cls_id" class="btn btn-warning">Güncelle</a></td>
-                <td><a href="/Classes/DeleteClass/@item.cls_id" class="btn btn-danger">Sil</a></td>
+                <td>
+                    <a href="/Classes/EditClass/@item.cls_id" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i> Güncelle
+                    </a>
+                </td>
+                <td>
+                    <a href="#" onclick="confirmDeletion('/Classes/DeleteClass/@item.cls_id')" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash-alt"></i> Sil
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a href="/Classes/CreateClass" class="btn btn-primary">Yeni Ders Ekle</a>
+<a href="/Classes/CreateClass" class="btn btn-primary mt-4">
+    <i class="fas fa-plus"></i> Yeni Ders Ekle
+</a>
+
+@section Scripts {
+    <script>
+        function confirmDeletion(url) {
+            if (confirm('Bu dersi silmek istediğinizden emin misiniz?')) {
+                window.location.href = url;
+            }
+        }
+    </script>
+}

@@ -1,4 +1,5 @@
-﻿
+﻿@model StudentNoteMVC.Models.EntityFramework.tbl_grades
+
 @{
     ViewBag.Title = "Not Ekle";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,30 +7,39 @@
 
 <h2>Not Ekle</h2>
 
-<form method="post" class="form form-group">
+@using (Html.BeginForm("CreateGrade", "Grades", FormMethod.Post, new { @class = "form form-group" }))
+{
+    @Html.AntiForgeryToken()
+
     <div class="form-group">
-        <label>Ders</label>
-        @Html.DropDownList("grd_cls_id", ViewData["Classes"] as SelectList, "Ders Seçin", new { @class = "form-control", required = "required" })
+        @Html.LabelFor(model => model.grd_cls_id, "Ders", htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownList("grd_cls_id", ViewData["Classes"] as SelectList, "Ders Seçin", new { @class = "form-control", required = "required"})
     </div>
+
     <div class="form-group">
-        <label>Öğrenci</label>
-        @Html.DropDownList("grd_std_id", ViewData["Students"] as SelectList, "Öğrenci Seçin", new { @class = "form-control", required = "required" })
+        @Html.LabelFor(model => model.grd_std_id, "Öğrenci", htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownList("grd_std_id", ViewData["Students"] as SelectList, "Öğrenci Seçin", new { @class = "form-control", required = "required"})
     </div>
+
     <div class="form-group">
-        <label for="exam1">Sınav1</label>
-        <input type="number" id="exam1" name="grd_exam1" class="form-control">
+        @Html.LabelFor(model => model.grd_exam1, "Sınav1", htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.grd_exam1, new { htmlAttributes = new { @class = "form-control", id = "exam1", name = "grd_exam1" } })
     </div>
+
     <div class="form-group">
-        <label for="exam2">Sınav2</label>
-        <input type="number" id="exam2" name="grd_exam2" class="form-control">
+        @Html.LabelFor(model => model.grd_exam2, "Sınav2", htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.grd_exam2, new { htmlAttributes = new { @class = "form-control", id = "exam2", name = "grd_exam2" } })
     </div>
+
     <div class="form-group">
-        <label for="exam3">Sınav3</label>
-        <input type="number" id="exam3" name="grd_exam3" class="form-control">
+        @Html.LabelFor(model => model.grd_exam3, "Sınav3", htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.grd_exam3, new { htmlAttributes = new { @class = "form-control", id = "exam3", name = "grd_exam3" } })
     </div>
+
     <div class="form-group">
-        <label for="project">Proje</label>
-        <input type="number" id="project" name="grd_project" class="form-control">
+        @Html.LabelFor(model => model.grd_project, "Proje", htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.grd_project, new { htmlAttributes = new { @class = "form-control", id = "project", name = "grd_project" } })
     </div>
+
     <button type="submit" class="btn btn-success">Kaydet</button>
-</form>
+}

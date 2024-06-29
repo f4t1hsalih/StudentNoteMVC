@@ -1,65 +1,65 @@
 ﻿@model StudentNoteMVC.Models.EntityFramework.tbl_grades
 
 @{
-    ViewBag.Title = "EditGrade";
+    ViewBag.Title = "Not Güncelle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("EditGrade", "Grades", FormMethod.Post))
+@using (Html.BeginForm("EditGrade", "Grades", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Not Güncelle</h4>
-        <hr />
-        @Html.HiddenFor(model => model.grd_id)
+    <h2>Not Güncelle</h2>
+    <hr />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.grd_cls_id, "Ders Seç", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("grd_cls_id", ViewData["Classes"] as SelectList, htmlAttributes: new { @class = "form-control" })
-            </div>
-        </div>
+    @Html.HiddenFor(model => model.grd_id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.grd_std_id, "Öğrenci Seç", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("grd_std_id", ViewData["Students"] as SelectList, htmlAttributes: new { @class = "form-control" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.grd_cls_id, "Ders Seç", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.grd_cls_id, ViewData["Classes"] as SelectList, "Ders Seçiniz", new { @class = "form-control" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.grd_exam1, "Sınav 1", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.grd_exam1, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.grd_std_id, "Öğrenci Seç", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.grd_std_id, ViewData["Students"] as SelectList, "Öğrenci Seçiniz", new { @class = "form-control" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.grd_exam2, "Sınav 2", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.grd_exam2, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.grd_exam1, "Sınav 1", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.grd_exam1, new { htmlAttributes = new { @class = "form-control" } })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.grd_exam3, "Sınav 3", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.grd_exam3, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.grd_exam2, "Sınav 2", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.grd_exam2, new { htmlAttributes = new { @class = "form-control" } })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.grd_project, "Proje", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.grd_project, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.grd_exam3, "Sınav 3", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.grd_exam3, new { htmlAttributes = new { @class = "form-control" } })
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Güncelle" class="btn btn-info" />
-            </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.grd_project, "Proje", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.grd_project, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Güncelle" class="btn btn-info" />
+            <a href="@Url.Action("Index", "Grades")" class="btn btn-secondary">İptal</a>
         </div>
     </div>
 }
-

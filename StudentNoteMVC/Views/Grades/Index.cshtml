@@ -4,13 +4,14 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <h2>Not Listesi</h2>
 
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>#</th>
+            <th>Fotoğraf</th>
             <th>Öğrenci</th>
             <th>Ders</th>
             <th>Sınav 1</th>
@@ -26,7 +27,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.grd_id</td>
+                <td class="photo-cell"><img src="@item.tbl_students.std_photo" alt="Fotoğraf" class="student-photo" /></td>
                 <td>@item.tbl_students.std_name @item.tbl_students.std_surname</td>
                 <td>@item.tbl_classes.cls_name</td>
                 <td>@item.grd_exam1</td>
@@ -42,10 +43,20 @@
                 {
                     <td>Kaldı</td>
                 }
-                <td><a href="/Grades/EditGrade/@item.grd_id" class="btn btn-info">Güncelle</a></td>
+                <td>
+                    <a href="@Url.Action("EditGrade", "Grades", new { id = item.grd_id })" class="btn btn-info">
+                        <i class="fas fa-edit"></i> Güncelle
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a href="/Grades/AddGrade" class="btn btn-primary">Not Ekle</a>
+<div class="row">
+    <div class="col-md-12">
+        <a href="@Url.Action("AddGrade", "Grades")" class="btn btn-primary mt-4">
+            <i class="fas fa-plus"></i> Yeni Not Ekle
+        </a>
+    </div>
+</div>

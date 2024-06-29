@@ -5,17 +5,17 @@
     ViewBag.Title = "Öğrenci Listesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <h2>Öğrenci Listesi</h2>
 
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>#</th>
+            <th>Fotoğraf</th>
             <th>Öğrenci Adı</th>
             <th>Öğrenci Soyadı</th>
             <th>Öğrenci Cinsiyeti</th>
-            <th>Öğrenci Fotoğrafı</th>
             <th>Öğrenci Kulübü</th>
             <th>Güncelle</th>
             <th>Sil</th>
@@ -25,31 +25,40 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.std_id</td>
+                <td class="photo-cell"><img src="@item.std_photo" alt="Fotoğraf" class="student-photo" /></td>
                 <td>@item.std_name</td>
                 <td>@item.std_surname</td>
-                @if (item.std_gender == true)
-                {
-                    <td>Erkek</td>
-                }
-                else if (item.std_gender == false)
-                {
-                    <td>Kadın</td>
-                }
-                <td><img src="@item.std_photo" alt="Fotoğraf" /></td>
-                @if (item.std_clb_id == null)
-                {
-                    <td>Kulübü Yok</td>
-                }
-                else
-                {
-                    <td>@item.tbl_clubs.clb_name</td>
-                }
-                <td><a href="/Students/EditStudent/@item.std_id" class="btn btn-warning">Güncelle</a></td>
-                <td><a href="/Students/DeleteStudent/@item.std_id" class="btn btn-danger">Sil</a></td>
+                <td>@(item.std_gender.HasValue ? (item.std_gender.Value ? "Erkek" : "Kadın") : "Belirtilmemiş")</td>
+                <td>@(item.std_clb_id == null ? "Kulübü Yok" : item.tbl_clubs.clb_name)</td>
+                <td>
+                    <a href="@Url.Action("EditStudent", "Students", new { id = item.std_id })" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Güncelle
+                    </a>
+                </td>
+                <td>
+                    <a href="#" onclick="confirmDeletion('@Url.Action("DeleteStudent", "Students", new { id = item.std_id })')" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Sil
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a href="/Students/AddStudent" class="btn btn-primary">Yeni Öğrenci Ekle</a>
+<div class="row">
+    <div class="col-md-12">
+        <a href="@Url.Action("AddStudent", "Students")" class="btn btn-primary mt-4">
+            <i class="fas fa-plus"></i> Yeni Öğrenci Ekle
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDeletion(url) {
+            if (confirm('Bu öğrenciyi silmek istediğinizden emin misiniz?')) {
+                window.location.href = url;
+            }
+        }
+    </script>
+}

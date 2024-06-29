@@ -1,34 +1,63 @@
 ﻿@using StudentNoteMVC.Models.EntityFramework
 @model List<tbl_clubs>
-
 @{
     ViewBag.Title = "Kulüpler";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-<h2>Kulüp Listesi</h2>
+<h2 class="mb-4">Kulüpler Listesi</h2>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Kulüp Adı</th>
-            <th>Kulüp Konteyjanı</th>
-            <th>Güncelle</th>
-            <th>Sil</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td><strong>@item.clb_id</strong></td>
-            <td>@item.clb_name</td>
-            <td>@item.clb_quota</td>
-            <td><a href="/Clubs/EditClub/@item.clb_id" class="btn btn-warning">Güncelle</a></td>
-            <td><a href="/Clubs/DeleteClub/@item.clb_id" class="btn btn-danger">Sil</a></td>
-        </tr>
-    }
-</table>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Kulüp Adı</th>
+                    <th>Kulüp Konteyjanı</th>
+                    <th>Güncelle</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><strong>@item.clb_id</strong></td>
+                        <td>@item.clb_name</td>
+                        <td>@item.clb_quota</td>
+                        <td>
+                            <a href="@Url.Action("EditClub", "Clubs", new { id = item.clb_id })" class="btn btn-warning">
+                                <i class="fas fa-edit"></i> Güncelle
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" onclick="confirmDeletion('@Url.Action("DeleteClub", "Clubs", new { id = item.clb_id })')" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i> Sil
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<a href="/Clubs/CreateClub" class="btn btn-primary">Yeni Kulüp Ekle</a>
+<div class="row">
+    <div class="col-md-12">
+        <a href="@Url.Action("CreateClub", "Clubs")" class="btn btn-primary mt-4">
+            <i class="fas fa-plus"></i> Yeni Kulüp Ekle
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDeletion(url) {
+            if (confirm('Bu kulübü silmek istediğinizden emin misiniz?')) {
+                window.location.href = url;
+            }
+        }
+    </script>
+}
