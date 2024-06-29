@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditStudent", "Students", FormMethod.Post))
 {
 
     <div class="form-horizontal">

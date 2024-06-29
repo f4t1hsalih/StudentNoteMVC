@@ -47,13 +47,26 @@ namespace StudentNoteMVC.Controllers
         }
 
         // Edit Club
-        [HttpGet]   
+        [HttpGet]
         public ActionResult EditClub(byte id)
         {
             using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
             {
                 var club = db.tbl_clubs.Find(id);
                 return View(club);
+            }
+        }
+        [HttpPost]
+        public ActionResult EditClub(tbl_clubs club)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                //db.Entry(club).State = System.Data.Entity.EntityState.Modified;
+                var value = db.tbl_clubs.Find(club.clb_id);
+                value.clb_name = club.clb_name;
+                value.clb_quota = club.clb_quota;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
         }
 
