@@ -46,6 +46,7 @@ namespace StudentNoteMVC.Controllers
         }
 
         // Edit Class
+        [HttpGet]
         public ActionResult EditClass(byte id)
         {
             using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
