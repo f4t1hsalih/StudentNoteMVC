@@ -44,5 +44,16 @@ namespace StudentNoteMVC.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        // Edit Class
+        public ActionResult EditClass(byte id)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                var lesson = db.tbl_classes.Find(id);
+                return View(lesson);
+            }
+        }
+
     }
 }
