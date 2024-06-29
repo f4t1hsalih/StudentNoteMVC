@@ -68,6 +68,16 @@ namespace StudentNoteMVC.Controllers
                 return View("EditStudent", student);
             }
         }
+        [HttpPost]
+        public ActionResult EditStudent(tbl_students student)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                db.Entry(student).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
 
     }
 }
