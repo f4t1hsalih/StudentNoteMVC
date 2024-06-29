@@ -121,5 +121,33 @@ namespace StudentNoteMVC.Controllers
             }
         }
 
+        // EditGrade
+        [HttpGet]
+        public ActionResult EditGrade(int id)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                var grade = db.tbl_grades.Find(id);
+
+                List<tbl_classes> classes = db.tbl_classes.ToList();
+                IEnumerable<SelectListItem> classListItems = classes.Select(c => new SelectListItem
+                {
+                    Value = c.cls_id.ToString(),
+                    Text = c.cls_name
+                });
+                ViewData["Classes"] = new SelectList(classListItems, "Value", "Text");
+
+                List<tbl_students> students = db.tbl_students.ToList();
+                IEnumerable<SelectListItem> studentListItems = students.Select(s => new SelectListItem
+                {
+                    Value = s.std_id.ToString(),
+                    Text = s.std_name + " " + s.std_surname
+                });
+                ViewData["Students"] = new SelectList(studentListItems, "Value", "Text");
+
+                return View(grade);
+            }
+        }
+
     }
 }
