@@ -46,5 +46,16 @@ namespace StudentNoteMVC.Controllers
             }
         }
 
+        // Edit Club
+        [HttpGet]   
+        public ActionResult EditClub(byte id)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                var club = db.tbl_clubs.Find(id);
+                return View(club);
+            }
+        }
+
     }
 }
