@@ -148,6 +148,47 @@ namespace StudentNoteMVC.Controllers
                 return View(grade);
             }
         }
+        [HttpPost]
+        public ActionResult EditGrade(tbl_grades grade)
+        {
+            using (DB_MVCSchoolEntities db = new DB_MVCSchoolEntities())
+            {
+                // Not ortalama ve durumunu hesapla
+                double total = 0;
+                int count = 0;
+
+                if (grade.grd_exam1 != null)
+                {
+                    total += (double)grade.grd_exam1;
+                    count++;
+                }
+                if (grade.grd_exam2 != null)
+                {
+                    total += (double)grade.grd_exam2;
+                    count++;
+                }
+                if (grade.grd_exam3 != null)
+                {
+                    total += (double)grade.grd_exam3;
+                    count++;
+                }
+                if (grade.grd_project != null)
+                {
+                    total += (double)grade.grd_project;
+                    count++;
+                }
+
+                double average = count > 0 ? total / count : 0;
+
+                grade.grd_average = decimal.Parse(average.ToString("F2"));
+                grade.grd_status = average >= 50 ? true : false;
+
+                db.Entry(grade).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+        }
 
     }
 }
